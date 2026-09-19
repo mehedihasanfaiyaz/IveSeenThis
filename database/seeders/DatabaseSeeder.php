@@ -25,20 +25,15 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $projects = collect([
+        $project = $user->projects()->updateOrCreate(
+            ['slug' => Project::makeSlug('IveSeenThis')],
             ['name' => 'IveSeenThis', 'description' => 'The engineering knowledge base.'],
-            ['name' => 'Inqord Auth', 'description' => 'Authentication and account flows.'],
-            ['name' => 'Media Host', 'description' => 'Uploads, storage, and media delivery.'],
-        ])->mapWithKeys(function (array $attributes) use ($user): array {
-            $project = $user->projects()->updateOrCreate(
-                ['slug' => Project::makeSlug($attributes['name'])],
-                $attributes,
-            );
+        );
 
-            return [$project->name => $project];
-        });
+        $user->issues()->update(['project_id' => $project->id]);
+        $user->projects()->whereKeyNot($project->id)->delete();
 
-        $this->seedIssue($user, $projects['Inqord Auth'], [
+        $this->seedIssue($user, $project, [
             'title' => 'Laravel Docker MySQL connection refused',
             'occurred_on' => '2026-09-18',
             'environment' => 'Laravel 13 / Docker / MySQL 8.4',
@@ -54,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'solution' => ['title' => 'Use the database service hostname', 'description' => 'Set DB_HOST=db inside the app container and let Compose provide the network connection.'],
         ]);
 
-        $this->seedIssue($user, $projects['Media Host'], [
+        $this->seedIssue($user, $project, [
             'title' => 'Uploaded files returned 404 in production',
             'occurred_on' => '2026-09-12',
             'environment' => 'Laravel 13 / Apache / Docker',
@@ -70,7 +65,7 @@ class DatabaseSeeder extends Seeder
             'solution' => ['title' => 'Create the storage link during deployment', 'description' => 'Run php artisan storage:link after the container starts and before serving requests.'],
         ]);
 
-        $this->seedIssue($user, $projects['IveSeenThis'], [
+        $this->seedIssue($user, $project, [
             'title' => 'Livewire page reported multiple root elements',
             'occurred_on' => '2026-09-10',
             'environment' => 'Laravel 13 / Livewire 4 / Flux',
