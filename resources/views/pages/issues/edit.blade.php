@@ -178,9 +178,9 @@ new #[Title('Edit issue')] class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="mx-auto w-full max-w-4xl">
+    <div class="workspace-frame w-full max-w-4xl">
         <div class="mb-8"><flux:link :href="route('issues.show', $issue)" wire:navigate icon="arrow-left">{{ __('Back to issue') }}</flux:link><flux:heading size="xl" class="mt-4">{{ __('Edit issue') }}</flux:heading><flux:subheading>{{ __('Update the details, attempts, or solution as you learn more.') }}</flux:subheading></div>
-        <form wire:submit="save" class="space-y-8">
+        <form wire:submit="save" class="surface space-y-8 p-6 sm:p-8">
             <div class="grid gap-5 md:grid-cols-2">
                 <flux:input wire:model="title" :label="__('Title')" required class="md:col-span-2" />
                 <flux:select wire:model="project_id" :label="__('Project')"><option value="">{{ __('Select a project') }}</option>@foreach ($this->projects() as $project)<option value="{{ $project->id }}">{{ $project->name }}</option>@endforeach</flux:select>

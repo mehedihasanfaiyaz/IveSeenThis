@@ -47,6 +47,98 @@
     }
 }
 
+@layer components {
+    .workspace-body {
+        background:
+            radial-gradient(circle at 85% 0%, rgba(221, 162, 91, 0.12), transparent 28rem),
+            linear-gradient(135deg, #f7f3eb 0%, #f1eee7 52%, #ece9e1 100%);
+        color: #18302d;
+    }
+
+    .dark .workspace-body {
+        background: #111b1a;
+        color: #eef3ed;
+    }
+
+    .workspace-main {
+        min-height: 100vh;
+        padding: 2.25rem clamp(1rem, 4vw, 4.5rem) 4rem;
+    }
+
+    .workspace-frame {
+        width: min(100%, 76rem);
+        margin-inline: auto;
+    }
+
+    .eyebrow {
+        color: #b9653e;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .surface {
+        border: 1px solid rgba(24, 48, 45, 0.12);
+        border-radius: 1rem;
+        background: rgba(255, 253, 248, 0.72);
+        box-shadow: 0 1.25rem 3rem rgba(56, 61, 47, 0.06);
+    }
+
+    .dark .surface {
+        border-color: rgba(238, 243, 237, 0.12);
+        background: rgba(25, 39, 37, 0.8);
+        box-shadow: none;
+    }
+
+    .metric-card {
+        position: relative;
+        min-height: 9rem;
+        overflow: hidden;
+        border-radius: 1rem;
+        padding: 1.25rem;
+        background: #18302d;
+        color: #f7f3eb;
+    }
+
+    .metric-card::after {
+        position: absolute;
+        right: -1.5rem;
+        bottom: -2rem;
+        width: 7rem;
+        height: 7rem;
+        border: 1px solid rgba(243, 205, 154, 0.3);
+        border-radius: 50%;
+        content: '';
+    }
+
+    .metric-card:nth-child(2) { background: #b9653e; }
+    .metric-card:nth-child(3) { background: #d39a50; color: #26312a; }
+
+    .issue-row {
+        display: block;
+        border-bottom: 1px solid rgba(24, 48, 45, 0.1);
+        padding: 1.2rem 1.35rem;
+        transition: background 160ms ease, padding-left 160ms ease;
+    }
+
+    .issue-row:hover {
+        background: rgba(211, 154, 80, 0.1);
+        padding-left: 1.6rem;
+    }
+
+    .dark .issue-row { border-color: rgba(238, 243, 237, 0.1); }
+
+    .notebook-line {
+        border-left: 2px solid #d39a50;
+        padding-left: 1.15rem;
+    }
+
+    @media (max-width: 640px) {
+        .workspace-main { padding: 1.25rem 1rem 3rem; }
+    }
+}
+
 [data-flux-field]:not(ui-radio, ui-checkbox) {
     @apply grid gap-2;
 }

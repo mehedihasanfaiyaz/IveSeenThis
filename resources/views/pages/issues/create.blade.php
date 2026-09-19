@@ -131,13 +131,13 @@ new #[Title('Log issue')] class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="mx-auto w-full max-w-4xl">
+    <div class="workspace-frame w-full max-w-4xl">
         <div class="mb-8">
             <flux:heading size="xl">{{ __('Log an issue') }}</flux:heading>
             <flux:subheading>{{ __('Capture enough context that the fix is reusable next time.') }}</flux:subheading>
         </div>
 
-        <form wire:submit="save" class="space-y-8">
+        <form wire:submit="save" class="surface space-y-8 p-6 sm:p-8">
             <div class="grid gap-5 md:grid-cols-2">
                 <flux:input wire:model="title" :label="__('Title')" placeholder="Laravel Docker MySQL connection refused" required class="md:col-span-2" />
                 <flux:select wire:model="project_id" :label="__('Project')">

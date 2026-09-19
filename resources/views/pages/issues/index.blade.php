@@ -26,20 +26,20 @@ new #[Title('Issues')] class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="mx-auto flex w-full max-w-6xl flex-col gap-8">
+    <div class="workspace-frame flex flex-col gap-8">
         <div class="flex flex-wrap items-end justify-between gap-4">
-            <div>
+            <div><p class="eyebrow">{{ __('The archive') }}</p>
                 <flux:heading size="xl">{{ __('Issues') }}</flux:heading>
                 <flux:subheading>{{ __('Every problem becomes a shortcut for future you.') }}</flux:subheading>
             </div>
             <flux:button variant="primary" icon="plus" :href="route('issues.create')" wire:navigate>{{ __('Log issue') }}</flux:button>
         </div>
 
-        <flux:input wire:model.live.debounce.300ms="search" icon="magnifying-glass" :placeholder="__('Search title, project, error, or tag...')" />
+        <div class="surface p-3"><flux:input wire:model.live.debounce.300ms="search" icon="magnifying-glass" :placeholder="__('Search title, project, error, or tag...')" /></div>
 
-        <div class="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+        <div class="surface overflow-hidden">
             @forelse ($this->issues as $issue)
-                <a href="{{ route('issues.show', $issue) }}" wire:navigate class="block border-b border-zinc-200 p-5 transition hover:bg-zinc-50 last:border-b-0 dark:border-zinc-700 dark:hover:bg-zinc-800/60">
+                <a href="{{ route('issues.show', $issue) }}" wire:navigate class="issue-row">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                         <div class="min-w-0">
                             <flux:heading size="lg" class="truncate">{{ $issue->title }}</flux:heading>
