@@ -15,6 +15,15 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="bug-ant" :href="route('issues.index')" :current="request()->routeIs('issues.*')" wire:navigate>
+                        {{ __('Issues') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="check-circle" :href="route('solutions.index')" :current="request()->routeIs('solutions.*')" wire:navigate>
+                        {{ __('Solutions') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="folder" :href="route('projects.index')" :current="request()->routeIs('projects.*')" wire:navigate>
+                        {{ __('Projects') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
