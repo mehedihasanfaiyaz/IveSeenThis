@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 #[Fillable(['project_id', 'title', 'occurred_on', 'environment', 'problem', 'error_logs', 'root_cause', 'dont_do_again', 'tags'])]
@@ -54,6 +55,12 @@ class Issue extends Model
     public function solutions(): HasMany
     {
         return $this->hasMany(Solution::class);
+    }
+
+    /** @return MorphMany<Attachment, $this> */
+    public function attachments(): MorphMany
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
     /** @return BelongsToMany<Issue, $this, Pivot, 'pivot'> */

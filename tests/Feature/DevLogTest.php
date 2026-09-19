@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\Issue;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -102,5 +104,30 @@ class DevLogTest extends TestCase
             'description' => 'Changed DB_HOST to the service hostname.',
             'result' => 'worked',
         ]);
+    }
+
+    public function test_user_can_upload_images_for_an_issue_attempt_and_solution(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        Livewire::test('pages::issues.create')
+            ->set('title', 'Image-backed issue')
+            ->set('problem', 'The screenshot explains the problem.')
+            ->set('problemImage', UploadedFile::fake()->image('problem.png'))
+            ->set('attempts.0.description', 'Tried the first fix.')
+            ->set('attempts.0.image', UploadedFile::fake()->image('attempt.png'))
+            ->set('solution_title', 'Use the correct setting')
+            ->set('solution', 'The screenshot shows the working setting.')
+            ->set('solutionImage', UploadedFile::fake()->image('solution.png'))
+            ->call('save');
+
+        $issue = Issue::firstOrFail();
+        $this->assertDatabaseCount('attachments', 3);
+        $this->assertSame(1, $issue->attachments()->count());
+        $this->assertSame(1, $issue->attempts()->first()->attachments()->count());
+        $this->assertSame(1, $issue->solutions()->first()->attachments()->count());
+        Storage::disk('public')->assertExists($issue->attachments()->first()->path);
     }
 }
