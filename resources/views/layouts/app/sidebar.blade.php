@@ -10,8 +10,16 @@
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
+            <div class="workspace-sidebar-intro px-5 pb-4 pt-2">
+                <p>{{ __('PERSONAL DEBUGGING ARCHIVE') }}</p>
+                <strong>{{ __('IveSeenThis') }}</strong>
+            </div>
+
             <flux:sidebar.nav class="px-3">
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                <flux:sidebar.item icon="plus" :href="route('issues.create')" wire:navigate class="workspace-sidebar-capture mb-4">
+                    {{ __('Log an issue') }}
+                </flux:sidebar.item>
+                <flux:sidebar.group :heading="__('Workspace')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
@@ -26,6 +34,12 @@
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
+
+            <div class="workspace-sidebar-project mx-5 mt-5">
+                <span>{{ __('Current project') }}</span>
+                <strong>{{ __('IveSeenThis') }}</strong>
+                <small>{{ __('Your searchable engineering memory') }}</small>
+            </div>
 
             <flux:spacer />
 
