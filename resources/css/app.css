@@ -151,22 +151,24 @@
         color: #f7f3eb !important;
     }
 
-    .workspace-sidebar-intro p,
-    .workspace-sidebar-project span,
-    .workspace-sidebar-project small {
-        color: #8eaaa0;
-        font-size: 0.62rem;
+    .workspace-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        color: #f7f3eb !important;
+        font-size: 0.95rem;
         font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
+        letter-spacing: -0.01em;
     }
 
-    .workspace-sidebar-intro strong,
-    .workspace-sidebar-project strong {
-        display: block;
+    .workspace-brand-mark {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
+        place-items: center;
+        border: 1px solid rgba(247, 243, 235, 0.22);
+        border-radius: 0.55rem;
         color: #f7f3eb;
-        font-size: 0.95rem;
-        letter-spacing: -0.01em;
     }
 
     .workspace-sidebar-capture {
@@ -179,26 +181,6 @@
         background: #e0ad67 !important;
     }
 
-    .workspace-sidebar-project {
-        border: 1px solid rgba(211, 154, 80, 0.28);
-        border-radius: 0.75rem;
-        background: rgba(211, 154, 80, 0.08);
-        padding: 0.85rem;
-    }
-
-    .workspace-sidebar-project strong {
-        margin-top: 0.3rem;
-    }
-
-    .workspace-sidebar-project small {
-        display: block;
-        margin-top: 0.45rem;
-        color: #b7c9c0;
-        font-size: 0.68rem;
-        font-weight: 400;
-        letter-spacing: 0;
-        text-transform: none;
-    }
 
     .editor-grid {
         display: grid;

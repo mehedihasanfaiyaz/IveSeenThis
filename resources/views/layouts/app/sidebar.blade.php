@@ -6,14 +6,12 @@
     <body class="workspace-body min-h-screen">
         <flux:sidebar sticky collapsible="mobile" class="workspace-sidebar border-e border-[#29443f] bg-[#18302d] text-[#f7f3eb] dark:border-[#29443f] dark:bg-[#102321]">
             <flux:sidebar.header>
-                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+                <a href="{{ route('dashboard') }}" wire:navigate class="workspace-brand">
+                    <span class="workspace-brand-mark"><x-app-logo-icon class="size-5 fill-current" /></span>
+                    <span>{{ __('IveSeenThis') }}</span>
+                </a>
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
-
-            <div class="workspace-sidebar-intro px-5 pb-4 pt-2">
-                <p>{{ __('PERSONAL DEBUGGING ARCHIVE') }}</p>
-                <strong>{{ __('IveSeenThis') }}</strong>
-            </div>
 
             <flux:sidebar.nav class="px-3">
                 <flux:sidebar.item icon="plus" :href="route('issues.create')" wire:navigate class="workspace-sidebar-capture mb-4">
@@ -34,12 +32,6 @@
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
-
-            <div class="workspace-sidebar-project mx-5 mt-5">
-                <span>{{ __('Current project') }}</span>
-                <strong>{{ __('IveSeenThis') }}</strong>
-                <small>{{ __('Your searchable engineering memory') }}</small>
-            </div>
 
             <flux:spacer />
 
