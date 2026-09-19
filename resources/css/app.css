@@ -134,8 +134,58 @@
         padding-left: 1.15rem;
     }
 
+    .workspace-sidebar [data-flux-sidebar-item] {
+        color: #dbe7df !important;
+    }
+
+    .workspace-sidebar [data-flux-sidebar-item][data-current] {
+        color: #18302d !important;
+        background: #fffdf8 !important;
+    }
+
+    .workspace-sidebar [data-flux-sidebar-group-heading] {
+        color: #d39a50 !important;
+    }
+
+    .workspace-sidebar [data-flux-brand] {
+        color: #f7f3eb !important;
+    }
+
+    .editor-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 17rem;
+        gap: 1.5rem;
+        align-items: start;
+    }
+
+    .editor-rail {
+        position: sticky;
+        top: 1.5rem;
+    }
+
+    .editor-section {
+        border-top: 1px solid rgba(24, 48, 45, 0.12);
+        padding-top: 1.75rem;
+    }
+
+    .dark .editor-section { border-color: rgba(238, 243, 237, 0.12); }
+
+    .attempt-card {
+        border: 1px solid rgba(24, 48, 45, 0.12);
+        border-radius: 0.75rem;
+        background: rgba(255, 253, 248, 0.55);
+        padding: 1rem;
+    }
+
+    .dark .attempt-card {
+        border-color: rgba(238, 243, 237, 0.12);
+        background: rgba(17, 27, 26, 0.7);
+    }
+
     @media (max-width: 640px) {
         .workspace-main { padding: 1.25rem 1rem 3rem; }
+        .editor-grid { grid-template-columns: 1fr; }
+        .editor-rail { position: static; order: -1; }
     }
 }
 
