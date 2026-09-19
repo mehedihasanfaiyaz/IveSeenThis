@@ -8,6 +8,7 @@ if [ ! -s .env ] || ! grep -q '^APP_KEY=base64:' .env; then
 fi
 
 php artisan migrate --force --no-interaction
+php artisan db:seed --force --no-interaction
 php artisan storage:link --force 2>/dev/null || true
 
 chown -R www-data:www-data storage bootstrap/cache

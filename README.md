@@ -58,6 +58,13 @@ docker compose down -v
 
 The application connects to the container database internally using host `db`, database `iveseenthis`, user `iveseenthis`, and password `iveseenthis`. The database does not need a host port for the application to work.
 
+The Docker database starts with demo data automatically. Use these credentials to explore it:
+
+```text
+Email: demo@iveseenthis.test
+Password: password
+```
+
 ## Installation
 
 ```bash
@@ -88,6 +95,7 @@ CREATE DATABASE inqord_iveseenthis CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode
 
 ```bash
 php artisan migrate
+php artisan db:seed
 php artisan serve
 ```
 
