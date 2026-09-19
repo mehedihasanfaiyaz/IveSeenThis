@@ -25,7 +25,7 @@
                     <flux:navbar.item
                         class="h-10 max-lg:hidden [&>div>svg]:size-5"
                         icon="folder-git-2"
-                        href="https://github.com/laravel/livewire-starter-kit"
+                        href="https://github.com/mehedihasanfaiyaz/IveSeenThis"
                         target="_blank"
                         :label="__('Repository')"
                     />
@@ -34,7 +34,7 @@
                     <flux:navbar.item
                         class="h-10 max-lg:hidden [&>div>svg]:size-5"
                         icon="book-open-text"
-                        href="https://laravel.com/docs/starter-kits#livewire"
+                        href="https://github.com/mehedihasanfaiyaz/IveSeenThis#readme"
                         target="_blank"
                         :label="__('Documentation')"
                     />
@@ -56,16 +56,25 @@
                     <flux:sidebar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard')  }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="bug-ant" :href="route('issues.index')" :current="request()->routeIs('issues.*')" wire:navigate>
+                        {{ __('Issues') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="check-circle" :href="route('solutions.index')" :current="request()->routeIs('solutions.*')" wire:navigate>
+                        {{ __('Solutions') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="folder" :href="route('projects.index')" :current="request()->routeIs('projects.*')" wire:navigate>
+                        {{ __('Projects') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
+                <flux:sidebar.item icon="folder-git-2" href="https://github.com/mehedihasanfaiyaz/IveSeenThis" target="_blank">
                     {{ __('Repository') }}
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
+                <flux:sidebar.item icon="book-open-text" href="https://github.com/mehedihasanfaiyaz/IveSeenThis#readme" target="_blank">
                     {{ __('Documentation') }}
                 </flux:sidebar.item>
             </flux:sidebar.nav>
