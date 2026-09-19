@@ -1,0 +1,41 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "${APP_PORT:-8081}:80"
+        environment:
+            APP_NAME: IveSeenThis
+            APP_ENV: local
+            APP_DEBUG: "true"
+            APP_URL: http://localhost:${APP_PORT:-8081}
+            DB_CONNECTION: mysql
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_DATABASE: iveseenthis
+            DB_USERNAME: iveseenthis
+            DB_PASSWORD: iveseenthis
+        depends_on:
+            db:
+                condition: service_healthy
+        restart: unless-stopped
+
+    db:
+        image: mysql:8.4
+        environment:
+            MYSQL_DATABASE: iveseenthis
+            MYSQL_USER: iveseenthis
+            MYSQL_PASSWORD: iveseenthis
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - iveseenthis-mysql:/var/lib/mysql
+        healthcheck:
+            test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -proot --silent"]
+            interval: 5s
+            timeout: 5s
+            retries: 20
+        restart: unless-stopped
+
+volumes:
+    iveseenthis-mysql:

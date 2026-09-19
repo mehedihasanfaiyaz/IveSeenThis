@@ -27,6 +27,37 @@ The app includes searchable issue and solution views, project organization, auth
 - Node.js and npm
 - MySQL 8+
 
+## One-Click Docker Setup
+
+With Docker Desktop installed, start the complete application and MySQL database with:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:8081`. The container generates the application key, runs all migrations, and builds the frontend assets automatically. Create an account from the registration page, then start logging issues.
+
+To use another host port, set `APP_PORT` before starting the stack:
+
+```bash
+APP_PORT=8080 docker compose up --build
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:APP_PORT = "8080"
+docker compose up --build
+```
+
+Stop the application with `Ctrl+C`. To remove the containers and database volume:
+
+```bash
+docker compose down -v
+```
+
+The application connects to the container database internally using host `db`, database `iveseenthis`, user `iveseenthis`, and password `iveseenthis`. The database does not need a host port for the application to work.
+
 ## Installation
 
 ```bash

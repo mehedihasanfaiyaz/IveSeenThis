@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.git
+.github
+node_modules
+vendor
+public/build
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+storage/logs
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+.phpunit.cache
