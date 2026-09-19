@@ -12,7 +12,8 @@ new #[Title('Issues')] class extends Component {
     public function issues()
     {
         return auth()->user()->issues()
-            ->with('project')
+            ->with(['project', 'solutions'])
+            ->withCount('attempts')
             ->when($this->search, fn ($query) => $query->where(function ($query) {
                 $query->where('title', 'like', "%{$this->search}%")
                     ->orWhere('problem', 'like', "%{$this->search}%")
@@ -38,32 +39,25 @@ new #[Title('Issues')] class extends Component {
         <div class="surface p-3"><flux:input wire:model.live.debounce.300ms="search" icon="magnifying-glass" :placeholder="__('Search title, project, error, or tag...')" /></div>
 
         <div class="surface overflow-hidden">
-            @forelse ($this->issues as $issue)
-                <a href="{{ route('issues.show', $issue) }}" wire:navigate class="issue-row">
-                    <div class="flex flex-wrap items-start justify-between gap-3">
-                        <div class="min-w-0">
-                            <flux:heading size="lg" class="truncate">{{ $issue->title }}</flux:heading>
-                            <flux:text class="mt-1">{{ $issue->project?->name ?? __('Unassigned project') }} · {{ $issue->occurred_on?->format('M j, Y') ?? __('No date') }}</flux:text>
-                        </div>
-                        @if ($issue->solutions->isNotEmpty())
-                            <flux:badge color="green" icon="check">{{ __('Solved') }}</flux:badge>
-                        @else
-                            <flux:badge color="amber">{{ __('Open') }}</flux:badge>
-                        @endif
-                    </div>
-                    <flux:text class="mt-4 line-clamp-2">{{ $issue->problem }}</flux:text>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        @foreach ($issue->tags ?? [] as $tag)
-                            <flux:badge size="sm">{{ $tag }}</flux:badge>
-                        @endforeach
-                    </div>
-                </a>
-            @empty
-                <div class="p-12 text-center">
-                    <flux:heading>{{ $search ? __('No matching issues') : __('Your log is empty') }}</flux:heading>
-                    <flux:text class="mt-2">{{ $search ? __('Try a different search.') : __('Capture the first problem while it is still fresh.') }}</flux:text>
-                </div>
-            @endforelse
+            <div class="overflow-x-auto">
+                <table class="issue-table w-full min-w-[760px] text-left">
+                    <thead><tr><th>{{ __('Issue') }}</th><th>{{ __('Project / environment') }}</th><th>{{ __('Attempts') }}</th><th>{{ __('Status') }}</th><th>{{ __('Logged') }}</th><th><span class="sr-only">{{ __('Open') }}</span></th></tr></thead>
+                    <tbody>
+                    @forelse ($this->issues as $issue)
+                        <tr>
+                            <td><a href="{{ route('issues.show', $issue) }}" wire:navigate class="issue-table-title">{{ $issue->title }}</a><span class="issue-table-problem">{{ $issue->problem }}</span><span class="issue-table-tags">@foreach ($issue->tags ?? [] as $tag)<span>{{ $tag }}</span>@endforeach</span></td>
+                            <td><strong>{{ $issue->project?->name ?? __('Unassigned') }}</strong><span>{{ $issue->environment ?: __('No environment') }}</span></td>
+                            <td>{{ $issue->attempts_count }}</td>
+                            <td>@if ($issue->solutions->isNotEmpty())<flux:badge color="green" icon="check">{{ __('Solved') }}</flux:badge>@else<flux:badge color="amber">{{ __('Open') }}</flux:badge>@endif</td>
+                            <td>{{ $issue->occurred_on?->format('M j, Y') ?? __('No date') }}</td>
+                            <td><a href="{{ route('issues.show', $issue) }}" wire:navigate class="issue-table-arrow" aria-label="{{ __('Open issue') }}">→</a></td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="6" class="p-12 text-center"><flux:heading>{{ $search ? __('No matching issues') : __('Your log is empty') }}</flux:heading><flux:text class="mt-2">{{ $search ? __('Try a different search.') : __('Capture the first problem while it is still fresh.') }}</flux:text></td></tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>

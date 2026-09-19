@@ -130,4 +130,23 @@ class DevLogTest extends TestCase
         $this->assertSame(1, $issue->solutions()->first()->attachments()->count());
         Storage::disk('public')->assertExists($issue->attachments()->first()->path);
     }
+
+    public function test_edit_page_shows_existing_problem_image_preview(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $issue = Issue::factory()->create(['user_id' => $user->id]);
+        Storage::disk('public')->put('issues/'.$issue->id.'/problem.png', 'image');
+        $issue->attachments()->create([
+            'disk' => 'public',
+            'path' => 'issues/'.$issue->id.'/problem.png',
+            'original_name' => 'problem.png',
+            'mime_type' => 'image/png',
+            'size' => 5,
+        ]);
+        $this->actingAs($user);
+
+        Livewire::test('pages::issues.edit', ['issue' => $issue])
+            ->assertSee('problem.png');
+    }
 }

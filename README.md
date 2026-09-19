@@ -58,6 +58,8 @@ docker compose down -v
 
 The application connects to the container database internally using host `db`, database `iveseenthis`, user `iveseenthis`, and password `iveseenthis`. The database does not need a host port for the application to work.
 
+Uploaded images are stored in the persistent `iveseenthis_storage` Docker volume, so rebuilding the Laravel image does not remove issue, attempt, or solution images. Remove that volume only when you intentionally want to delete uploads.
+
 The Docker database starts with demo data automatically. Use these credentials to explore it:
 
 ```text

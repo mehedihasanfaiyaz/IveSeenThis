@@ -19,6 +19,8 @@ services:
         depends_on:
             db:
                 condition: service_healthy
+        volumes:
+            - iveseenthis-storage:/var/www/html/storage/app/public
         restart: unless-stopped
 
     db:
@@ -39,3 +41,5 @@ services:
 
 volumes:
     iveseenthis-mysql:
+    iveseenthis-storage:
+        name: iveseenthis_storage

@@ -129,6 +129,84 @@
 
     .dark .issue-row { border-color: rgba(238, 243, 237, 0.1); }
 
+    .issue-table thead {
+        background: rgba(24, 48, 45, 0.06);
+        color: #b9653e;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .dark .issue-table thead { background: rgba(255, 255, 255, 0.04); }
+
+    .issue-table th,
+    .issue-table td {
+        border-bottom: 1px solid rgba(24, 48, 45, 0.1);
+        padding: 0.9rem 1rem;
+        vertical-align: middle;
+    }
+
+    .dark .issue-table th,
+    .dark .issue-table td { border-color: rgba(238, 243, 237, 0.1); }
+
+    .issue-table tbody tr { transition: background 140ms ease; }
+    .issue-table tbody tr:hover { background: rgba(211, 154, 80, 0.09); }
+    .issue-table tbody tr:last-child td { border-bottom: 0; }
+
+    .issue-table td:not(:first-child) {
+        color: #526760;
+        font-size: 0.82rem;
+        white-space: nowrap;
+    }
+
+    .dark .issue-table td:not(:first-child) { color: #b7c9c0; }
+
+    .issue-table td strong,
+    .issue-table td span { display: block; }
+    .issue-table td strong { color: #18302d; font-weight: 600; }
+    .dark .issue-table td strong { color: #f7f3eb; }
+
+    .issue-table-title {
+        color: #18302d;
+        font-weight: 700;
+    }
+
+    .dark .issue-table-title { color: #f7f3eb; }
+    .issue-table-title:hover { color: #b9653e; }
+
+    .issue-table-problem {
+        max-width: 24rem;
+        overflow: hidden;
+        color: #526760;
+        font-size: 0.78rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .dark .issue-table-problem { color: #b7c9c0; }
+
+    .issue-table-tags {
+        display: flex !important;
+        gap: 0.35rem;
+        margin-top: 0.4rem;
+    }
+
+    .issue-table-tags span {
+        display: inline-block;
+        border-radius: 999px;
+        background: rgba(211, 154, 80, 0.16);
+        padding: 0.15rem 0.45rem;
+        color: #8d5c2d;
+        font-size: 0.65rem;
+    }
+
+    .issue-table-arrow {
+        color: #b9653e;
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
     .notebook-line {
         border-left: 2px solid #d39a50;
         padding-left: 1.15rem;
